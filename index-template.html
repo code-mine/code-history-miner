@@ -1,0 +1,155 @@
+<head>
+    <link href="stylesheets/bootstrap.css" rel="stylesheet"/>
+    <link href="stylesheets/bootstrap-theme.css" rel="stylesheet"/>
+    <link href="stylesheets/sticky-footer.css" rel="stylesheet"/>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/common.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/stacked-barchart.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/force-graph.css">
+    <script src="js/d3.v3.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/stacked-barchart.js"></script>
+    <script src="js/series-chart.js"></script>
+    <script src="js/force-graph.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Code History Miner</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#why">Why?</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        Examples <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="examples/JUnit.html">JUnit</a></li>
+                        <li><a href="examples/Cucumber.html">Cucumber</a></li>
+                        <li><a href="examples/Rails.html">Ruby on Rails</a></li>
+                        <li><a href="examples/jQuery.html">jQuery</a></li>
+                        <li><a href="examples/Clojure.html">Clojure</a></li>
+                        <li><a href="examples/Groovy.html">Groovy</a></li>
+                        <li><a href="examples/Scala.html">Scala</a></li>
+                        <li><a href="examples/IntelliJ.html">IntelliJ</a></li>
+                    </ul>
+                </li>
+                <li style="background-color: #080808">
+                    <a href="#download" class="open">Download</a>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <div class="jumbotron">
+        <h1 align="center">Code History Miner</h1>
+        <p align="center">
+            Tool for analysis and visualization of code history.
+            "Continuous integration" server for code history.
+        </p>
+    </div>
+
+    <div id="visualizationsCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox" style="height: 644px">
+            <div class="item">
+                <h4 align="center">Change size chart (Scala)</h4>
+                <div style="padding-left: 170px">
+                    <!--tag-insert-point-->
+                </div>
+            </div>
+            <div class="item">
+                <h4 align="center">Amount of TODOs (JUnit)</h4>
+                <div style="padding-left: 170px">
+                    <!--tag-insert-point-->
+                </div>
+            </div>
+            <div class="item active">
+                <h4 align="center">Amount of changing files chart (Clojure)</h4>
+                <div style="padding-left: 170px">
+                    <!--tag-insert-point-->
+                </div>
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#visualizationsCarousel" role="button" data-slide="prev" id="prevSlide">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#visualizationsCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <div class="jumbotron" id="why">
+        <h1 align="center">Why?</h1>
+        <p align="center">
+            There is a lot of interesting and useful data captured in version control systems, yet we don't use it that much.
+            This is an attempt to make looking at project history easier.
+        </p>
+        <p align="center">
+            Find out what happened on project.
+            Find trends in code changes.
+            Look for code-change/behavioral patterns.
+        </p>
+        <p align="center">
+            See also <a href="https://pragprog.com/book/atcrime/your-code-as-a-crime-scene">Your Code as a Crime Scene</a> book.
+        </p>
+    </div>
+
+    <div class="jumbotron" id="download">
+        <h1 align="center">Download</h1>
+        <p align="center">
+            Sorry, nothing to download yet. This is work-in-progress.
+            <br/>
+            If you would like to receive notification when it's ready,
+            please follow <a href="https://twitter.com/codehistorymine">@CodeHistoryMine</a> on twitter.
+        </p>
+        <h2 align="center">Features</h2>
+        <p align="center">
+            Similar to continuous integration servers Code History Miner is a web server to run inside your company.
+            You can setup multiple projects pointing them to one or more VCS paths.
+            For each project you will get daily updated visualizations of project code history.
+            Analysis works on file level and, therefore, is programming language-agnostic.
+            See visualization examples for
+            <a href="examples/JUnit.html">JUnit</a>,
+            <a href="examples/Cucumber.html">Cucumber</a>,
+            <a href="examples/Rails.html">Ruby on Rails</a>,
+            <a href="examples/jQuery.html">jQuery</a>,
+            <a href="examples/Clojure.html">Clojure</a>,
+            <a href="examples/Groovy.html">Groovy</a>,
+            <a href="examples/Scala.html">Scala</a>,
+            <a href="examples/IntelliJ.html">IntelliJ</a>.
+        </p>
+        <p align="center">
+            Requirements: Any OS with Java >= 1.6. Git/Svn. Browser with SVG support. Project size < 1M LOC.
+        </p>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <p class="text-muted">
+                <span class="col-md-1"></span>
+                <span class="col-md-10">&copy; 2015 Code Mine Ltd.</span>
+                <span class="col-md-1"></span>
+            </p>
+        </div>
+    </div>
+</footer>
+
+<!--script-insert-point-->
+<!--script-insert-point-->
+<!--script-insert-point-->
+
+</body>
