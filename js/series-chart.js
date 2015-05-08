@@ -100,8 +100,59 @@ function seriesCharts() {
                     .x(function(d) { return xScale.getAndApply(d); })
                     .y(function(d) { return yScale.getAndApply(d); });
             }
+        },
+
+        newCategoriesPanel: function(root, lineSeries, dataSource, labelText) {
+            var hiddenCategories = [];
+
+            var wordPanel = root.append("span");
+            wordPanel.append("label").html(labelText);
+            var wordsSpan = wordPanel.append("span");
+            wordPanel.append("button").text("Reset").on("click", function() {
+                dataSource.clearCategoryExclusions();
+            });
+
+            var it = {};
+            it.update = function(update) {
+                wordsSpan.selectAll(".word").remove();
+
+                var word = wordsSpan.selectAll(".word")
+                    .data(update.seriesData).enter()
+                    .append("span")
+                    .attr("class", "word");
+
+                word.on("mouseover", function(d) {
+                    lineSeries.setSelectedCategory(d.category);
+                });
+                word.on("mouseout", function() {
+                    lineSeries.setSelectedCategory(null);
+                });
+
+                word.append("input").attr("type", "checkbox")
+                    .attr("checked", function(it) { return _.contains(hiddenCategories, it.category) ? null : ""; })
+                    .on("click", function(it) {
+                        if (d3.event.altKey) {
+                            dataSource.excludeCategory(it.category);
+                        } else {
+                            var visible = this.checked;
+                            lineSeries.setCategoryVisible(it.category, visible);
+                            if (visible) {
+                                hiddenCategories = _.without(hiddenCategories, it.category);
+                            } else {
+                                hiddenCategories.push(it.category);
+                            }
+                        }
+                    });
+                word.append("label").html(function(d){ return "&nbsp;" + d.category; });
+            };
+            it.onLineSeriesUpdate = function() {
+                hiddenCategories.forEach(function(it) {
+                    lineSeries.setCategoryVisible(it, false);
+                });
+            };
+            return it;
         }
 
-    }.__init__();
+}.__init__();
 }
 }());

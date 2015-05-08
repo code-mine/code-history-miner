@@ -232,11 +232,11 @@ function barCharts() {
 
             var rowTotal = "_row_total_";
             var stackedDataSource = withStackedData(
-                autoGroupOnFirstUpdate(
+                autoGroupOnFirstUpdate(100,
                 clampedMin(0, withMinMax(rowTotal,
-                withMinMaxKey(
                 filteredByPercentile(rowTotal,
                 withRowTotal(rowTotal,
+                withMinMaxKey(
                 groupedBy(d3time([d3.time.day, d3.time.monday, d3.time.month]),
                 dataSource
             ))))))));
@@ -250,48 +250,17 @@ function barCharts() {
 
             var rowTotal = "_row_total_";
             var stackedDataSource = withStackedData(
-                autoGroupOnFirstUpdate(
+                autoGroupOnFirstUpdate(100,
                 clampedMin(0, withMinMax(rowTotal,
-                withMinMaxKey(
                 filteredByPercentile(rowTotal,
                 withRowTotal(rowTotal,
+                withMinMaxKey(
                 withDataSourceIndexAsGroup(groupFunctions,
                 dataSource
             ))))))));
             stackedDataSource.rowTotal = rowTotal;
             return stackedDataSource;
 		},
-
-        autoGroupOnFirstUpdate: function(dataSource) {
-            var ranOnce = false;
-            var it = _.clone(dataSource);
-            var notifyListeners = observable(it);
-            dataSource.onUpdate(function(update) {
-                if (ranOnce) {
-                    notifyListeners(update);
-                    return;
-                }
-                ranOnce = true;
-                var groupFunction = _.find(update.groupFunctions, function(groupFunction) {
-                    var threshold = 100;
-                    var count = 0;
-                    var value = update.min[update.key];
-                    while (value < update.max[update.key] && count < threshold) {
-                        value = groupFunction.nextFloor(value);
-                        count++;
-                    }
-                    return count < threshold;
-                });
-                if (groupFunction === undefined) {
-                    groupFunction = _.last(update.groupFunctions);
-                }
-                dataSource.groupBy(groupFunction);
-            });
-            it.sendUpdate = function() {
-                dataSource.sendUpdate();
-            };
-            return it;
-        },
 
 
         percentileDropDown: function(root, data) {
@@ -348,10 +317,10 @@ function barCharts() {
 
 			var it = {};
 			it.update = function(update) {
-				var getValue = function(it) { return it[update.totalKey]; };
-				var getDate = function(it) { return it.date; };
+                var getRowDate = function(it) { return it.date; };
+                var getRowValue = function(it) { return it[update.totalKey]; };
                 movingAverageData = movingAverageForTimedValues(
-                    update.data, update.groupFloor, update.groupNextFloor, getDate, getValue
+                    update.data, update.groupFloor, update.groupNextFloor, getRowDate, getRowValue
                 );
 				redrawLine();
 			};
@@ -365,30 +334,17 @@ function barCharts() {
 			return it;
 		},
 
-		movingAverageForTimedValues: function(data, groupFloor, groupNextFloor, getDate, getValue, period) {
-            function valuesRange(from, to) {
-                var threshold = 0;
-                var result = [];
-                from = groupFloor(from);
-                while (from < to && threshold++ < 1000000) {
-                    result.push(from);
-                    from = groupNextFloor(from);
-                }
-                result.push(from);
-                return result;
-            }
-
+		movingAverageForTimedValues: function(data, groupFloor, groupNextFloor, getRowDate, getRowValue, period) {
             if (data === undefined || data.length < 2) return [];
-
 			period = (period === undefined ? Math.round(data.length / 10) : period);
 			if (period < 2) return [];
 
-			var firstDate = getDate(data[0]);
-			var lastDate = getDate(data[data.length - 1]);
+			var firstDate = getRowDate(data[0]);
+			var lastDate = getRowDate(data[data.length - 1]);
 			var allDates = valuesRange(firstDate, lastDate);
 			if (allDates.length < period) return [];
 
-            data = valuesForEachDate(data, allDates, getDate, getValue);
+            data = valuesForEachDate(data, allDates, getRowDate, getRowValue);
 
 			var mean = d3.mean(allDates.slice(0, period), function(date){ return data[date]; });
 			var result = [{date: allDates[period - 1], mean: mean}];
@@ -401,7 +357,25 @@ function barCharts() {
 			}
 
 			return result;
-		},
+
+            function valuesRange(from, to) {
+                var threshold = 0;
+                var result = [];
+                from = groupFloor(from);
+                while (from < to && threshold++ < 1000000) {
+                    result.push(from);
+                    from = groupNextFloor(from);
+                }
+                result.push(from);
+                return result;
+            }
+            function valuesForEachDate(data, datesRange, getDate, getValue) {
+                var result = {};
+                datesRange.forEach(function(date) { result[date] = 0; });
+                data.forEach(function(d) { result[getDate(d)] = getValue(d); });
+                return result;
+            }
+        },
 
 
         // based on https://gist.github.com/ZJONSSON/3918369
@@ -413,7 +387,7 @@ function barCharts() {
                 var legend = root.append("g").attr("class", "legend")
                     .attr("transform", "translate(" + position.x + "," + position.y + ")");
 
-                if (items.length === 0) {
+                if (items.length <= 1) {
                     legend.style("opacity", 0);
                 } else {
                     legend.style("opacity", 0.9)
@@ -514,12 +488,5 @@ function barCharts() {
 
 	}.__init__();
 
-
-    function valuesForEachDate(data, datesRange, getDate, getValue) {
-        var result = {};
-        datesRange.forEach(function(date) { result[date] = 0; });
-        data.forEach(function(d) { result[getDate(d)] = getValue(d); });
-        return result;
-    }
 }
 }());

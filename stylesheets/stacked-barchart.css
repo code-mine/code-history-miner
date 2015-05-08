@@ -22,7 +22,6 @@
 
 /* based on http://nvd3.org/examples/multiBar.html */
 .tooltip {
-    visibility: hidden;
     position: absolute;
     background-color: rgba(245,245,245,1.0);
     padding: 5px;
