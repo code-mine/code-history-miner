@@ -1,0 +1,33 @@
+.navbar {
+    margin-bottom: 0;
+}
+.jumbotron ul {
+    margin-bottom: 5px;
+    font-size: 21px;
+    font-weight: 200;
+}
+.jumbotron p {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.container-fluid .jumbotron {
+    padding: 10px 0;
+    border-radius: 0;
+}
+.carousel-control {
+    filter: none;
+    opacity: 1;
+}
+.carousel-control.left {
+    filter: none;
+    background: none no-repeat;
+}
+.carousel-control.right {
+    filter: none;
+    background: none no-repeat;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}

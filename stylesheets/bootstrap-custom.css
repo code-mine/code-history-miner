@@ -1,0 +1,84 @@
+.navbar {
+    border-radius: 0;
+}
+
+a.project-link {
+    font-weight: bold;
+}
+.project-link-separator {
+    opacity: 0.4;
+    padding-left: 0.5em;
+    padding-right: 0.3em;
+}
+.progress {
+    margin-bottom: 0;
+}
+.progress-bar-label {
+    float: left;
+    margin-right: 1em;
+}
+/* css below is from https://github.com/twbs/bootstrap/issues/12848 */
+.progress-bar[aria-valuenow="1"],
+.progress-bar[aria-valuenow="2"] {
+    min-width: 3%;
+}
+.progress-bar[aria-valuenow="0"] {
+    color: gray;
+    min-width: 3%;
+    background: transparent;
+    box-shadow: none;
+}
+
+table {
+    table-layout: fixed;
+}
+.table > thead > tr > th {
+    font-weight: normal;
+}
+th.project-name { width: 30% }
+th.project-status { width: 70% }
+td.visualization { width: 85% }
+td.visualization-delete { width: 15% }
+td.vcs-url { width: 70% }
+td.vcs-type { width: 15% }
+td.vcs-delete { width: 15% }
+
+.btn-primary {
+    margin-right: 10px;
+}
+
+.alert {
+    text-align: center;
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+}
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+.footer .container {
+    width: auto;
+    padding: 0 15px;
+    margin: 20px 0;
+    text-align: center;
+}

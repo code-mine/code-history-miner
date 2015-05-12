@@ -1,13 +1,15 @@
 <head>
     <link href="stylesheets/bootstrap.css" rel="stylesheet"/>
     <link href="stylesheets/bootstrap-theme.css" rel="stylesheet"/>
-    <link href="stylesheets/sticky-footer.css" rel="stylesheet"/>
+    <link href="stylesheets/bootstrap-custom.css" rel="stylesheet"/>
+    <link href="stylesheets/bootstrap-custom2.css" rel="stylesheet"/>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="stylesheets/common.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/stacked-barchart.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/force-graph.css">
+
     <script src="js/d3.v3.min.js"></script>
     <script src="js/underscore-min.js"></script>
     <script src="js/common.js"></script>
@@ -47,14 +49,15 @@
         <!--/.nav-collapse -->
     </div>
 </nav>
-<div class="container">
+<div class="container-fluid">
     <div class="jumbotron">
         <h1 align="center">Code History Miner</h1>
         <p align="center">
             Server for continuous analysis and visualization of code history.
         </p>
     </div>
-
+</div>
+<div class="container">
     <div id="visualizationsCarousel" class="carousel slide" data-ride="carousel">
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox" style="height: 644px">
@@ -106,7 +109,8 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-
+</div>
+<div class="container-fluid">
     <div class="jumbotron" id="why">
         <h1 align="center">Why?</h1>
         <p align="center">
@@ -123,10 +127,10 @@
         </p>
     </div>
 
-    <div class="jumbotron">
-        <h1 align="center">Demo</h1>
+    <div class="jumbotron" style="background-color: #fff">
+        <h2 align="center">Demo of adding visualization</h2>
         <p align="center">
-            <img style="border: 7px solid white; border-radius: 5px" src="demo.gif"/>
+            <img style="border: 3px solid rgba(0, 0, 0, .075); border-radius: 5px" src="demo.gif"/>
         </p>
     </div>
 
@@ -137,13 +141,15 @@
             <br/>
             <b>
                 If you would like to know when it's ready,
-                add <a href="https://twitter.com/codehistorymine">@CodeHistoryMine</a> on twitter.
+                please follow <a href="https://twitter.com/codehistorymine">@CodeHistoryMine</a> on twitter.
             </b>
             <br/>
             You can also try
             <a href="http://dkandalov.github.io/code-history-mining-cli/">command line version</a>
             or <a href="https://plugins.jetbrains.com/plugin/7273?pr=idea">plugin for IntelliJ IDEs.</a>
         </p>
+    </div>
+    <div class="jumbotron" style="background-color: #fff">
         <h2 align="center">Features</h2>
         <p align="center">
             Similar to continuous integration servers Code History Miner is a web server to run inside your company.
