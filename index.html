@@ -26,24 +26,24 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#why">Why?</a></li>
+                <li><a href="#why" onclick="postEvent(this, 'Why', 'MainMenu');"> Why? </a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Examples <span class="caret"></span>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
+                       onclick="postEvent(this, 'Examples', 'MainMenu');"> Examples <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="examples/JUnit.html">JUnit</a></li>
-                        <li><a href="examples/Cucumber.html">Cucumber</a></li>
-                        <li><a href="examples/Rails.html">Ruby on Rails</a></li>
-                        <li><a href="examples/jQuery.html">jQuery</a></li>
-                        <li><a href="examples/Clojure.html">Clojure</a></li>
-                        <li><a href="examples/Groovy.html">Groovy</a></li>
-                        <li><a href="examples/Scala.html">Scala</a></li>
-                        <li><a href="examples/IntelliJ.html">IntelliJ</a></li>
+                        <li><a href="examples/JUnit.html" onclick="postEvent(this, 'JUnit', 'MainMenu');">JUnit</a></li>
+                        <li><a href="examples/Cucumber.html" onclick="postEvent(this, 'Cucumber', 'MainMenu');">Cucumber</a></li>
+                        <li><a href="examples/Rails.html" onclick="postEvent(this, 'RoR', 'MainMenu');">Ruby on Rails</a></li>
+                        <li><a href="examples/jQuery.html" onclick="postEvent(this, 'jQuery', 'MainMenu');">jQuery</a></li>
+                        <li><a href="examples/Clojure.html" onclick="postEvent(this, 'Clojure', 'MainMenu');">Clojure</a></li>
+                        <li><a href="examples/Groovy.html" onclick="postEvent(this, 'Groovy', 'MainMenu');">Groovy</a></li>
+                        <li><a href="examples/Scala.html" onclick="postEvent(this, 'Scala', 'MainMenu');">Scala</a></li>
+                        <li><a href="examples/IntelliJ.html" onclick="postEvent(this, 'IntelliJ', 'MainMenu');">IntelliJ</a></li>
                     </ul>
                 </li>
                 <li style="background-color: #080808">
-                    <a href="#download" class="open">Download</a>
+                    <a href="#download" class="open" onclick="postEvent(this, 'Download', 'MainMenu');"> Download </a>
                 </li>
             </ul>
         </div>
@@ -121,16 +121,20 @@
     <div class="jumbotron" id="why">
         <h1 align="center">Why?</h1>
         <p align="center">
+            There is a lot of interesting and useful data captured in version control systems, yet we don't use it that much.
+            This is an attempt to make looking at project history easier.
+        </p>
+        <p align="center">
             Find out what happened on project.
             Find trends in code changes.
             Look for code-change/behavioral patterns.
         </p>
         <p align="center">
-            There is a lot of interesting and useful data captured in version control systems, yet we don't use it that much.
-            This is an attempt to make looking at project history easier.
-        </p>
-        <p align="center">
-            See also <a href="https://pragprog.com/book/atcrime/your-code-as-a-crime-scene">Your Code as a Crime Scene</a> book.
+            See also
+            <a href="https://pragprog.com/book/atcrime/your-code-as-a-crime-scene" onclick="postEvent(this, 'Book', 'Page');">
+                Your Code as a Crime Scene
+            </a>
+            book.
         </p>
     </div>
 
@@ -147,13 +151,21 @@
             Sorry, nothing to download yet. Demo version will be available soon.
             <br/>
             <b>
-                If you would like to know when it's ready,
-                please follow <a href="https://twitter.com/codehistorymine">@CodeHistoryMine</a> on twitter.
+                If you would like to know when it's ready, please follow
+                <a href="https://twitter.com/codehistorymine" onclick="postEvent(this, 'Twitter', 'Page');">
+                    @CodeHistoryMine
+                </a>
+                on twitter.
             </b>
             <br/>
             (In the meantime you can try
-            <a href="http://dkandalov.github.io/code-history-mining-cli/">command line version</a>
-            or <a href="https://plugins.jetbrains.com/plugin/7273?pr=idea">plugin for IntelliJ IDEs.</a>)
+            <a href="http://dkandalov.github.io/code-history-mining-cli/" onclick="postEvent(this, 'CLI', 'Page');">
+                command line version
+            </a>
+            or
+            <a href="https://plugins.jetbrains.com/plugin/7273?pr=idea" onclick="postEvent(this, 'Plugin', 'Page');">
+                plugin for IntelliJ IDEs.
+            </a>)
         </p>
     </div>
 
@@ -166,14 +178,14 @@
             Analysis works on file level and, therefore, is programming language-agnostic.
             <br/>
             See visualization examples for
-            <a href="examples/JUnit.html">JUnit</a>,
-            <a href="examples/Cucumber.html">Cucumber</a>,
-            <a href="examples/Rails.html">Ruby on Rails</a>,
-            <a href="examples/jQuery.html">jQuery</a>,
-            <a href="examples/Clojure.html">Clojure</a>,
-            <a href="examples/Groovy.html">Groovy</a>,
-            <a href="examples/Scala.html">Scala</a>,
-            <a href="examples/IntelliJ.html">IntelliJ</a>.
+            <a href="examples/JUnit.html" onclick="postEvent(this, 'JUnit', 'Page');">JUnit</a>,
+            <a href="examples/Cucumber.html" onclick="postEvent(this, 'Cucumber', 'Page');">Cucumber</a>,
+            <a href="examples/Rails.html" onclick="postEvent(this, 'RoR', 'Page');">Ruby on Rails</a>,
+            <a href="examples/jQuery.html" onclick="postEvent(this, 'jQuery', 'Page');">jQuery</a>,
+            <a href="examples/Clojure.html" onclick="postEvent(this, 'Clojure', 'Page');">Clojure</a>,
+            <a href="examples/Groovy.html" onclick="postEvent(this, 'Groovy', 'Page');">Groovy</a>,
+            <a href="examples/Scala.html" onclick="postEvent(this, 'Scala', 'Page');">Scala</a>,
+            <a href="examples/IntelliJ.html" onclick="postEvent(this, 'IntelliJ', 'Page');">IntelliJ</a>.
         </p>
         <br/>
         <h2 align="center">Requirements</h2>
@@ -18689,6 +18701,14 @@ date,unchanged,recently changed\n\
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
+
+    function postEvent(aTag, action, category) {
+        _gaq.push(['_trackEvent', category, action, aTag.href]);
+        setTimeout(function() {
+            location.href = aTag.href;
+        }, 200);
+        return false;
+    }
 </script>
 
 </body>
