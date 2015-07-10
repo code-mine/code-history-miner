@@ -26,9 +26,9 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#why" onclick="postEvent(this, 'Why', 'MainMenu');"> Why? </a></li>
-                <li><a href="#download" onclick="postEvent(this, 'Download', 'MainMenu');"> Download </a></li>
-                <li><a href="help.html" onclick="postEvent(this, 'Documentation', 'MainMenu');"> Documentation </a></li>
+                <li><a href="#why" onclick="return postEvent(this, 'Why', 'MainMenu');"> Why? </a></li>
+                <li><a href="#download" onclick="return postEvent(this, 'Download', 'MainMenu');"> Download </a></li>
+                <li><a href="help.html" onclick="return postEvent(this, 'Documentation', 'MainMenu');"> Documentation </a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -41,11 +41,11 @@
             Server for project code history analysis and visualization.
         </p>
         <div align="center">
-            <a id="download-link" class="btn btn-primary" href="#" role="button" onclick="postEvent(this, 'Download', 'Page');">
+            <a id="download-url" class="btn btn-primary" href="#" role="button" onclick="return postEvent(this, 'Download', 'Page');">
                 Download
             </a>
             <!--version-->0.1 beta<!--version-->,
-            <!--build-date-->built on 8 June 2015<!--build-date-->
+            built on <!--build-date-->8 June 2015<!--build-date-->
         </div>
     </div>
 </div>
@@ -105,14 +105,14 @@
             You can setup projects pointing them at VCS repositories and get visualizations as output.
             <br/>
             For example of visualizations, see
-            <a href="examples/JUnit.html" onclick="postEvent(this, 'JUnit', 'Page');">JUnit</a>,
-            <a href="examples/Cucumber.html" onclick="postEvent(this, 'Cucumber', 'Page');">Cucumber</a>,
-            <a href="examples/Rails.html" onclick="postEvent(this, 'RoR', 'Page');">Ruby on Rails</a>,
-            <a href="examples/jQuery.html" onclick="postEvent(this, 'jQuery', 'Page');">jQuery</a>,
-            <a href="examples/Clojure.html" onclick="postEvent(this, 'Clojure', 'Page');">Clojure</a>,
-            <a href="examples/Groovy.html" onclick="postEvent(this, 'Groovy', 'Page');">Groovy</a>,
-            <a href="examples/Scala.html" onclick="postEvent(this, 'Scala', 'Page');">Scala</a>,
-            <a href="examples/IntelliJ.html" onclick="postEvent(this, 'IntelliJ', 'Page');">IntelliJ</a>.
+            <a href="examples/JUnit.html" onclick="return postEvent(this, 'JUnit', 'Page');">JUnit</a>,
+            <a href="examples/Cucumber.html" onclick="return postEvent(this, 'Cucumber', 'Page');">Cucumber</a>,
+            <a href="examples/Rails.html" onclick="return postEvent(this, 'RoR', 'Page');">Ruby on Rails</a>,
+            <a href="examples/jQuery.html" onclick="return postEvent(this, 'jQuery', 'Page');">jQuery</a>,
+            <a href="examples/Clojure.html" onclick="return postEvent(this, 'Clojure', 'Page');">Clojure</a>,
+            <a href="examples/Groovy.html" onclick="return postEvent(this, 'Groovy', 'Page');">Groovy</a>,
+            <a href="examples/Scala.html" onclick="return postEvent(this, 'Scala', 'Page');">Scala</a>,
+            <a href="examples/IntelliJ.html" onclick="return postEvent(this, 'IntelliJ', 'Page');">IntelliJ</a>.
         </p>
         <p align="center">
             (Analysis works on file level and, therefore, is programming language-agnostic.)
@@ -129,8 +129,8 @@
     <div class="jumbotron" id="download">
         <h2 align="center">Download / Install</h2>
             <div align="center">
-                <a id="download-link2" class="btn btn-primary" href="#" role="button" style="margin-right: 0"
-                   onclick="postEvent(this, 'Download', 'Page');">
+                <a id="download-url2" class="btn btn-primary" href="#" role="button" style="margin-right: 0"
+                   onclick="return postEvent(this, 'Download', 'Page');">
                     Download Latest Version
                 </a>
                 <br/>
@@ -179,9 +179,9 @@ Started server on http://127.0.0.1:8222
 <!--script-insert-point--><!--script-insert-point-->
 
 <script type="text/javascript">
-    var downloadUrl = /*download-link*/""/*download-link*/;
-    $("#download-link").attr("href", downloadUrl);
-    $("#download-link2").attr("href", downloadUrl);
+    var downloadUrl = /*download-url*/""/*download-url*/;
+    $("#download-url").attr("href", downloadUrl);
+    $("#download-url2").attr("href", downloadUrl);
 
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-56523002-2']);
