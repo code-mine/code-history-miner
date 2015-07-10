@@ -1,0 +1,67 @@
+<head>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <link href="stylesheets/bootstrap.css" rel="stylesheet"/>
+    <link href="stylesheets/bootstrap-theme.css" rel="stylesheet"/>
+    <link href="stylesheets/bootstrap-custom.css" rel="stylesheet"/>
+    <link href="stylesheets/bootstrap-custom2.css" rel="stylesheet"/>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Code History Miner</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <h1 align="center">[Under construction]</h1>
+        <p align="center">
+            Sorry there is no documentation yet.
+            <br/>
+            But feel free to drop a line to dev@codehistoryminer.com or @CodeHistoryMine on twitter.
+        </p>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <p class="text-muted">
+                <span class="col-md-1"></span>
+                <span class="col-md-10">&copy; 2015 Code Mine Ltd.</span>
+                <span class="col-md-1"></span>
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-56523002-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    function postEvent(aTag, action, category) {
+        _gaq.push(['_trackEvent', category, action, aTag.href]);
+        setTimeout(function() {
+            location.href = aTag.href;
+        }, 200);
+        return false;
+    }
+</script>
+
+</body>
