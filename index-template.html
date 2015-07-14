@@ -11,12 +11,20 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stacked-barchart.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/force-graph.css">
 
+    <link rel="stylesheet" href="font-awesome-4.3.0/css/font-awesome.min.css">
+
     <script src="js/d3.v3.min.js"></script>
     <script src="js/underscore-min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/stacked-barchart.js"></script>
     <script src="js/series-chart.js"></script>
     <script src="js/force-graph.js"></script>
+
+    <style>
+        .fa {
+            color: #777;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -104,7 +112,7 @@
             <br/>
             You can setup projects pointing them at VCS repositories and get visualizations as output.
             <br/>
-            For example of visualizations, see
+            For example of visualizations see
             <a href="examples/JUnit.html" onclick="return postEvent(this, 'JUnit', 'Page');">JUnit</a>,
             <a href="examples/Cucumber.html" onclick="return postEvent(this, 'Cucumber', 'Page');">Cucumber</a>,
             <a href="examples/Rails.html" onclick="return postEvent(this, 'RoR', 'Page');">Ruby on Rails</a>,
@@ -166,9 +174,17 @@ Started server on http://127.0.0.1:8222
     <div class="container">
         <div class="row">
             <p class="text-muted">
-                <span class="col-md-1"></span>
-                <span class="col-md-10">&copy; 2015 Code Mine Ltd.</span>
-                <span class="col-md-1"></span>
+                <span class="col-md-2">
+                    <a href="https://twitter.com/CodeHistoryMine">
+                        <i class="fa fa-twitter-square fa-2x"></i>
+                    </a>
+                    &nbsp;
+                    <a href="mailto:dev@codehistoryminer.com">
+                        <i class="fa fa-envelope-square fa-2x"></i>
+                    </a>
+                </span>
+                <span class="col-md-8">&copy; 2015 Code Mine Ltd.</span>
+                <span class="col-md-2"></span>
             </p>
         </div>
     </div>
