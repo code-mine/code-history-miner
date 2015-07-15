@@ -11,12 +11,24 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stacked-barchart.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/force-graph.css">
 
+    <link rel="stylesheet" href="font-awesome-4.3.0/css/font-awesome.min.css">
+
     <script src="js/d3.v3.min.js"></script>
     <script src="js/underscore-min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/stacked-barchart.js"></script>
     <script src="js/series-chart.js"></script>
     <script src="js/force-graph.js"></script>
+
+    <style>
+        /* color to match bootstrap muted text color */
+        .fa { color: #aaa; }
+        /* hide barchart tooltips because mis-aligned in carousel */
+        .tooltip {
+            opacity: 0.0;
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -45,7 +57,7 @@
                 Download
             </a>
             <!--version-->0.1 beta<!--version-->,
-            built on <!--build-date-->10 Jul 2015<!--build-date-->
+            built on <!--build-date-->8 June 2015<!--build-date-->
         </div>
     </div>
 </div>
@@ -58,6 +70,7 @@
                 <div style="padding-left: 170px">
                     
     <section class="row">
+        
         <div id="change-size-chart" class="bar-chart"></div>
         
         <br/><br/>
@@ -70,6 +83,7 @@
                 <div style="padding-left: 170px">
                     
     <section class="row">
+        
         <div id="amount-of-todos-chart" class="bar-chart"></div>
         
         <br/><br/>
@@ -82,6 +96,7 @@
                 <div style="padding-left: 170px">
                     
     <section class="row">
+        
         <div id="amount-of-changing-files-chart" class="bar-chart"></div>
         
         <br/><br/>
@@ -122,7 +137,10 @@
             <br/>
             You can setup projects pointing them at VCS repositories and get visualizations as output.
             <br/>
-            For example of visualizations, see
+            Analysis works on file level and, therefore, is programming language-agnostic.
+        </p>
+        <p align="center">
+            For example of visualizations see
             <a href="examples/JUnit.html" onclick="return postEvent(this, 'JUnit', 'Page');">JUnit</a>,
             <a href="examples/Cucumber.html" onclick="return postEvent(this, 'Cucumber', 'Page');">Cucumber</a>,
             <a href="examples/Rails.html" onclick="return postEvent(this, 'RoR', 'Page');">Ruby on Rails</a>,
@@ -131,9 +149,6 @@
             <a href="examples/Groovy.html" onclick="return postEvent(this, 'Groovy', 'Page');">Groovy</a>,
             <a href="examples/Scala.html" onclick="return postEvent(this, 'Scala', 'Page');">Scala</a>,
             <a href="examples/IntelliJ.html" onclick="return postEvent(this, 'IntelliJ', 'Page');">IntelliJ</a>.
-        </p>
-        <p align="center">
-            (Analysis works on file level and, therefore, is programming language-agnostic.)
         </p>
     </div>
 
@@ -184,9 +199,17 @@ Started server on http://127.0.0.1:8222
     <div class="container">
         <div class="row">
             <p class="text-muted">
-                <span class="col-md-1"></span>
-                <span class="col-md-10">&copy; 2015 Code Mine Ltd.</span>
-                <span class="col-md-1"></span>
+                <span class="col-md-2">
+                    <a href="https://twitter.com/CodeHistoryMine">
+                        <i class="fa fa-twitter-square fa-2x"></i>
+                    </a>
+                    &nbsp;
+                    <a href="mailto:dev@codehistoryminer.com">
+                        <i class="fa fa-envelope-square fa-2x"></i>
+                    </a>
+                </span>
+                <span class="col-md-8">&copy; 2015 Code Mine Ltd.</span>
+                <span class="col-md-2"></span>
             </p>
         </div>
     </div>
@@ -3088,7 +3111,47 @@ date,value\n\
 22/04/2015,2\n\
 23/04/2015,1\n\
 25/04/2015,1\n\
-28/04/2015,1\n\
+28/04/2015,2\n\
+29/04/2015,1\n\
+30/04/2015,1\n\
+01/05/2015,2\n\
+02/05/2015,2\n\
+03/05/2015,3\n\
+05/05/2015,2\n\
+06/05/2015,8\n\
+08/05/2015,2\n\
+11/05/2015,5\n\
+15/05/2015,2\n\
+17/05/2015,1\n\
+18/05/2015,2\n\
+19/05/2015,1\n\
+20/05/2015,2\n\
+22/05/2015,4\n\
+25/05/2015,5\n\
+26/05/2015,6\n\
+27/05/2015,4\n\
+28/05/2015,5\n\
+02/06/2015,3\n\
+04/06/2015,3\n\
+05/06/2015,2\n\
+07/06/2015,1\n\
+09/06/2015,1\n\
+10/06/2015,1\n\
+12/06/2015,2\n\
+14/06/2015,1\n\
+16/06/2015,1\n\
+17/06/2015,6\n\
+18/06/2015,5\n\
+19/06/2015,6\n\
+20/06/2015,1\n\
+21/06/2015,4\n\
+22/06/2015,8\n\
+23/06/2015,2\n\
+24/06/2015,1\n\
+25/06/2015,2\n\
+27/06/2015,1\n\
+28/06/2015,3\n\
+29/06/2015,1\n\
 ",
 "\
 date,added,modified,removed\n\
@@ -5982,7 +6045,47 @@ date,added,modified,removed\n\
 22/04/2015,3,7,0\n\
 23/04/2015,0,1,0\n\
 25/04/2015,19,20,2\n\
-28/04/2015,0,2,0\n\
+28/04/2015,0,3,0\n\
+29/04/2015,2,1,0\n\
+30/04/2015,0,4,0\n\
+01/05/2015,1,20,23\n\
+02/05/2015,0,1,1\n\
+03/05/2015,2,9,0\n\
+05/05/2015,6,4,0\n\
+06/05/2015,0,15,0\n\
+08/05/2015,0,3,0\n\
+11/05/2015,0,12,84\n\
+15/05/2015,3,4,0\n\
+17/05/2015,1,8,0\n\
+18/05/2015,7,6,0\n\
+19/05/2015,0,1,0\n\
+20/05/2015,0,2,0\n\
+22/05/2015,6,6,0\n\
+25/05/2015,0,12,0\n\
+26/05/2015,2,25,0\n\
+27/05/2015,0,5,0\n\
+28/05/2015,3,9,0\n\
+02/06/2015,1,4,0\n\
+04/06/2015,0,10,0\n\
+05/06/2015,0,2,0\n\
+07/06/2015,0,1,0\n\
+09/06/2015,2,1,0\n\
+10/06/2015,0,5,0\n\
+12/06/2015,0,2,0\n\
+14/06/2015,0,2,0\n\
+16/06/2015,0,2,0\n\
+17/06/2015,6,20,3\n\
+18/06/2015,0,37,0\n\
+19/06/2015,5,38,0\n\
+20/06/2015,0,4,0\n\
+21/06/2015,0,40,0\n\
+22/06/2015,11,45,0\n\
+23/06/2015,0,6,0\n\
+24/06/2015,0,2,0\n\
+25/06/2015,0,2,0\n\
+27/06/2015,2,2,0\n\
+28/06/2015,1,23,0\n\
+29/06/2015,0,2,0\n\
 ",
 "\
 date,added,modified,removed\n\
@@ -8876,7 +8979,47 @@ date,added,modified,removed\n\
 22/04/2015,42,3,0\n\
 23/04/2015,0,5,0\n\
 25/04/2015,100,183,308\n\
-28/04/2015,0,0,6\n\
+28/04/2015,0,2,6\n\
+29/04/2015,1,0,0\n\
+30/04/2015,0,4,0\n\
+01/05/2015,30,14,1010\n\
+02/05/2015,1,0,127\n\
+03/05/2015,17,5,2\n\
+05/05/2015,4,3,3\n\
+06/05/2015,89,77,71\n\
+08/05/2015,2,4,1\n\
+11/05/2015,78,5,31825\n\
+15/05/2015,77,18,6\n\
+17/05/2015,49,16,2\n\
+18/05/2015,33,8,1\n\
+19/05/2015,0,1,0\n\
+20/05/2015,2,1,0\n\
+22/05/2015,4,9,4\n\
+25/05/2015,109,27,7\n\
+26/05/2015,94,72,13\n\
+27/05/2015,16,28,2\n\
+28/05/2015,78,10,1\n\
+02/06/2015,77,245,217\n\
+04/06/2015,43,20,6\n\
+05/06/2015,1,5,0\n\
+07/06/2015,0,9,1\n\
+09/06/2015,1,0,0\n\
+10/06/2015,24,2,2\n\
+12/06/2015,19,1,5\n\
+14/06/2015,9,2,0\n\
+16/06/2015,0,2,0\n\
+17/06/2015,91,56,256\n\
+18/06/2015,47,50,11\n\
+19/06/2015,98,107,65\n\
+20/06/2015,6,0,10\n\
+21/06/2015,29,65,16\n\
+22/06/2015,114,153,35\n\
+23/06/2015,37,14,4\n\
+24/06/2015,0,3,0\n\
+25/06/2015,5,3,0\n\
+27/06/2015,6,18,2\n\
+28/06/2015,5,31,0\n\
+29/06/2015,5,4,0\n\
 ",
 "\
 date,added,modified,removed\n\
@@ -11770,7 +11913,47 @@ date,added,modified,removed\n\
 22/04/2015,1664,181,0\n\
 23/04/2015,0,220,0\n\
 25/04/2015,2343,5395,18738\n\
-28/04/2015,0,0,303\n\
+28/04/2015,0,105,303\n\
+29/04/2015,164,0,0\n\
+30/04/2015,0,407,0\n\
+01/05/2015,1911,744,49008\n\
+02/05/2015,89,0,3800\n\
+03/05/2015,855,336,52\n\
+05/05/2015,335,191,255\n\
+06/05/2015,4316,5132,4405\n\
+08/05/2015,179,555,176\n\
+11/05/2015,3715,355,1137526\n\
+15/05/2015,3775,1531,254\n\
+17/05/2015,2363,1130,30\n\
+18/05/2015,1785,500,27\n\
+19/05/2015,0,508,0\n\
+20/05/2015,273,56,0\n\
+22/05/2015,237,631,270\n\
+25/05/2015,4633,2017,477\n\
+26/05/2015,4068,4728,703\n\
+27/05/2015,575,967,113\n\
+28/05/2015,4051,877,61\n\
+02/06/2015,2919,7484,5793\n\
+04/06/2015,1834,1510,404\n\
+05/06/2015,27,138,0\n\
+07/06/2015,0,551,7\n\
+09/06/2015,73,0,0\n\
+10/06/2015,683,131,119\n\
+12/06/2015,655,34,247\n\
+14/06/2015,391,133,0\n\
+16/06/2015,0,184,0\n\
+17/06/2015,2927,2666,8172\n\
+18/06/2015,2784,3514,656\n\
+19/06/2015,4837,6886,3068\n\
+20/06/2015,94,0,454\n\
+21/06/2015,913,4300,534\n\
+22/06/2015,6398,10082,1932\n\
+23/06/2015,2196,1218,328\n\
+24/06/2015,0,63,0\n\
+25/06/2015,438,737,0\n\
+27/06/2015,431,953,77\n\
+28/06/2015,329,2203,0\n\
+29/06/2015,331,204,0\n\
 "];
 
         _.extend(this, d3c.barCharts());
@@ -11811,7 +11994,7 @@ date,added,modified,removed\n\
 
         var controlsPanel = newControlsPanel(root, uiConfig);
         newShowMovingAverageCheckBox(controlsPanel, movingAverageLine);
-        percentileDropDown(controlsPanel, data);
+        
         var groupBy = newGroupByDropDown(controlsPanel, data, "Group by:", ["day", "week", "month"]);
         newGroupIndexDropDown(controlsPanel, data, "Code churn measured in:", ["commits", "files", "lines", "characters"]);
                 var totalSize = newTotalAmountLabel(controlsPanel.leftFooter(), "Total size:&nbsp;");
@@ -12547,6 +12730,13 @@ date,value\n\
 13/04/2015,1\n\
 14/04/2015,1\n\
 19/04/2015,1\n\
+01/05/2015,1\n\
+14/05/2015,1\n\
+21/05/2015,1\n\
+04/06/2015,1\n\
+05/06/2015,1\n\
+10/06/2015,1\n\
+26/06/2015,1\n\
 11/01/2001,64\n\
 12/01/2001,64\n\
 13/01/2001,64\n\
@@ -17050,6 +17240,67 @@ date,value\n\
 16/04/2015,1\n\
 17/04/2015,1\n\
 18/04/2015,1\n\
+20/04/2015,1\n\
+21/04/2015,1\n\
+22/04/2015,1\n\
+23/04/2015,1\n\
+24/04/2015,1\n\
+25/04/2015,1\n\
+26/04/2015,1\n\
+27/04/2015,1\n\
+28/04/2015,1\n\
+29/04/2015,1\n\
+30/04/2015,1\n\
+02/05/2015,1\n\
+03/05/2015,1\n\
+04/05/2015,1\n\
+05/05/2015,1\n\
+06/05/2015,1\n\
+07/05/2015,1\n\
+08/05/2015,1\n\
+09/05/2015,1\n\
+10/05/2015,1\n\
+11/05/2015,1\n\
+12/05/2015,1\n\
+13/05/2015,1\n\
+15/05/2015,1\n\
+16/05/2015,1\n\
+17/05/2015,1\n\
+18/05/2015,1\n\
+19/05/2015,1\n\
+20/05/2015,1\n\
+22/05/2015,1\n\
+23/05/2015,1\n\
+24/05/2015,1\n\
+25/05/2015,1\n\
+26/05/2015,1\n\
+27/05/2015,1\n\
+28/05/2015,1\n\
+29/05/2015,1\n\
+30/05/2015,1\n\
+31/05/2015,1\n\
+01/06/2015,1\n\
+02/06/2015,1\n\
+03/06/2015,1\n\
+06/06/2015,1\n\
+07/06/2015,1\n\
+08/06/2015,1\n\
+09/06/2015,1\n\
+11/06/2015,1\n\
+12/06/2015,1\n\
+13/06/2015,1\n\
+14/06/2015,1\n\
+15/06/2015,1\n\
+16/06/2015,1\n\
+17/06/2015,1\n\
+18/06/2015,1\n\
+19/06/2015,1\n\
+20/06/2015,1\n\
+21/06/2015,1\n\
+22/06/2015,1\n\
+23/06/2015,1\n\
+24/06/2015,1\n\
+25/06/2015,1\n\
 ",
 "\
 date,value\n\
@@ -17410,6 +17661,12 @@ date,value\n\
 06/04/2015,1\n\
 13/04/2015,1\n\
 20/04/2015,1\n\
+27/04/2015,1\n\
+11/05/2015,1\n\
+18/05/2015,1\n\
+01/06/2015,1\n\
+08/06/2015,1\n\
+22/06/2015,1\n\
 22/01/2001,64\n\
 29/01/2001,64\n\
 05/02/2001,64\n\
@@ -17799,6 +18056,9 @@ date,value\n\
 09/03/2015,1\n\
 16/03/2015,1\n\
 23/03/2015,1\n\
+04/05/2015,1\n\
+25/05/2015,1\n\
+15/06/2015,1\n\
 ",
 "\
 date,value\n\
@@ -17936,6 +18196,8 @@ date,value\n\
 01/01/2015,0\n\
 01/03/2015,0\n\
 01/04/2015,0\n\
+01/05/2015,0\n\
+01/06/2015,0\n\
 01/02/2001,63\n\
 01/03/2001,63\n\
 01/06/2001,63\n\
@@ -18507,6 +18769,16 @@ date,unchanged,recently changed\n\
 06/04/2015,289,14\n\
 13/04/2015,303,0\n\
 20/04/2015,291,12\n\
+27/04/2015,303,0\n\
+04/05/2015,303,0\n\
+11/05/2015,289,14\n\
+18/05/2015,300,3\n\
+25/05/2015,303,0\n\
+01/06/2015,303,0\n\
+08/06/2015,303,0\n\
+15/06/2015,294,9\n\
+22/06/2015,303,0\n\
+29/06/2015,302,1\n\
 ",
 "\
 date,unchanged,recently changed\n\
@@ -18620,6 +18892,8 @@ date,unchanged,recently changed\n\
 01/02/2015,287,7\n\
 01/03/2015,264,39\n\
 01/04/2015,285,18\n\
+01/05/2015,287,16\n\
+01/06/2015,294,9\n\
 "];
 
         _.extend(this, d3c.barCharts());
@@ -18651,7 +18925,7 @@ date,unchanged,recently changed\n\
         var data = newStackedDataArrayPreGrouped(rawData, d3time([d3.time.monday, d3.time.month]));
         var x = withGroupValueSize(uiConfig, newTimeScale(data.key).nice().rangeRound([0, uiConfig.width]));
         var y = newScale(data.rowTotal).range([uiConfig.height, 0]);
-        var bars = newBars(svg, uiConfig, x, y, "bars");
+        var bars = newBars(svg, uiConfig, x, y);
         var xAxis = newXAxis(svg, x, uiConfig);
         var yAxis = newYAxis(svg, y).label("Changed files");
         var mesh = newMesh(svg, uiConfig, y);
@@ -18675,7 +18949,7 @@ date,unchanged,recently changed\n\
 
 
 <script type="text/javascript">
-    var downloadUrl = /*download-url*/ "download/code-history-miner-372.zip" /*download-url*/;
+    var downloadUrl = /*download-url*/""/*download-url*/;
     $("#download-url").attr("href", downloadUrl);
     $("#download-url2").attr("href", downloadUrl);
 
