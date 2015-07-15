@@ -38,6 +38,10 @@ function common() {
             it.contain = function(value) {
                 return it.contains(value);
             };
+            it.remove = function(value) {
+                delete it[keyFunction(value)];
+                return it;
+            };
             return it;
         },
 
@@ -702,6 +706,7 @@ function common() {
             if (settings.descriptionCss === undefined) settings.descriptionCss = "helpDescription";
             if (settings.tooltipPad === undefined) settings.tooltipPad = 0;
 
+            // from http://getbootstrap.com/components/#glyphicons
             var helpButtonImage = "iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAATZJREFUeNq8VtERwiAMLZ7/skFxAusGHaEjMIIjOEJH6AgdoSPUCWSEboCkBg/RQqBa7t6V6+XlQUgITGtdUAZjTJiP8H4rw1ckByC0BHTcgkMwXYBCGxH0tSDAkawTARxOEjKjMhgzRCyAWwWFUGRaIWIx+WJ+uMYfiLg749+EYmfSGTSYIALnfezM3oSQGCLIQGbKCFe4QqHdDJ7j2k9lsIntyhqG6uTiOOycwxbO/2uozsBmjxVfBmq6NjYc502RPkrUmEORmlHSC52K2Nc5QjKjuJOFRu8epBa33CXGe3DmkNYHIk8xXNmdSLhhkdrEOBF5R+phrsGc3jZ0PXFlZ0NiAJgTOf2r8RGuIP00/bh+KDsSqZdqjlCb2yYqr4bS28RmjW/TVr7p4+Rfzy221QPyIcAAaxoAnJVfnkgAAAAASUVORK5CYII=";
 
             var tooltipIsVisible = false;

@@ -81,7 +81,7 @@ function barCharts() {
         },
 
         newBars: function(root, uiConfig, xScale, yScale, idPostfix) {
-			idPostfix = (idPostfix === undefined ? "-bars" : "-" + idPostfix);
+			idPostfix = (idPostfix === undefined ? "-bars-" + _.uniqueId() : "-" + idPostfix);
 			var color = uiConfig.color || d3.scale.category20();
             var barWidth = uiConfig.barWidth || "10px";
 			var dataStacked;
@@ -175,7 +175,7 @@ function barCharts() {
                     .attr("width", brushUiConfig.width).attr("height", brushUiConfig.height)
                     .attr("style", "fill:none;stroke:black;stroke-width:1;stroke-opacity:0.1;shape-rendering:crispEdges");
 
-                var bars = newBars(g, brushUiConfig, brushXScale, brushYScale, "brushBars");
+                var bars = newBars(g, brushUiConfig, brushXScale, brushYScale, "brushBars-" + _.uniqueId());
                 if (update !== null) bars.update(update);
 
                 g.append("g")
