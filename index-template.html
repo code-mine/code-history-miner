@@ -21,8 +21,12 @@
     <script src="js/force-graph.js"></script>
 
     <style>
-        .fa {
-            color: #777;
+        /* color to match bootstrap muted text color */
+        .fa { color: #777; }
+        /* hide barchart tooltips because mis-aligned in carousel */
+        .tooltip {
+            opacity: 0.0;
+            display: none;
         }
     </style>
 </head>
@@ -112,6 +116,9 @@
             <br/>
             You can setup projects pointing them at VCS repositories and get visualizations as output.
             <br/>
+            Analysis works on file level and, therefore, is programming language-agnostic.
+        </p>
+        <p align="center">
             For example of visualizations see
             <a href="examples/JUnit.html" onclick="return postEvent(this, 'JUnit', 'Page');">JUnit</a>,
             <a href="examples/Cucumber.html" onclick="return postEvent(this, 'Cucumber', 'Page');">Cucumber</a>,
@@ -121,9 +128,6 @@
             <a href="examples/Groovy.html" onclick="return postEvent(this, 'Groovy', 'Page');">Groovy</a>,
             <a href="examples/Scala.html" onclick="return postEvent(this, 'Scala', 'Page');">Scala</a>,
             <a href="examples/IntelliJ.html" onclick="return postEvent(this, 'IntelliJ', 'Page');">IntelliJ</a>.
-        </p>
-        <p align="center">
-            (Analysis works on file level and, therefore, is programming language-agnostic.)
         </p>
     </div>
 
