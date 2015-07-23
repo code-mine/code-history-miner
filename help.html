@@ -6,6 +6,7 @@
     <link href="stylesheets/bootstrap-custom2.css" rel="stylesheet"/>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="font-awesome-4.3.0/css/font-awesome.min.css">
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -15,6 +16,9 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="/index.html#why" onclick="return postEvent(this, 'Why', 'MainMenu');"> Why? </a></li>
+                <li><a href="/index.html#download" onclick="return postEvent(this, 'Download', 'MainMenu');"> Download </a></li>
+                <li><a href="#" onclick="return postEvent(this, 'Documentation', 'MainMenu');"> Documentation </a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -23,7 +27,7 @@
 
 <div class="container-fluid">
     <div class="jumbotron">
-        <h1 align="center">[Under construction]</h1>
+        <h2 align="center"></h2>
         <p align="center">
             Sorry there is no documentation yet.
             <br/>
@@ -36,9 +40,17 @@
     <div class="container">
         <div class="row">
             <p class="text-muted">
-                <span class="col-md-1"></span>
-                <span class="col-md-10">&copy; 2015 Code Mine Ltd.</span>
-                <span class="col-md-1"></span>
+                <span class="col-md-2">
+                    <a href="https://twitter.com/CodeHistoryMine">
+                        <i class="fa fa-twitter-square fa-2x"></i>
+                    </a>
+                    &nbsp;
+                    <a href="mailto:dev@codehistoryminer.com">
+                        <i class="fa fa-envelope-square fa-2x"></i>
+                    </a>
+                </span>
+                <span class="col-md-8">&copy; 2015 Code Mine Ltd.</span>
+                <span class="col-md-2"></span>
             </p>
         </div>
     </div>

@@ -1,3 +1,4 @@
+/* bootstrap customization for web-site */
 .navbar {
     margin-bottom: 0;
 }
@@ -31,3 +32,6 @@
     padding-left: 0;
     padding-right: 0;
 }
+
+/* change color of font-awesome icons to match bootstrap muted text color */
+.fa { color: #aaa; }
