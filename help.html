@@ -12,29 +12,148 @@
 <nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="">Code History Miner</a>
+            <a class="navbar-brand" href="index.html">Code History Miner</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/index.html#why" onclick="return postEvent(this, 'Why', 'MainMenu');"> Why? </a></li>
-                <li><a href="/index.html#download" onclick="return postEvent(this, 'Download', 'MainMenu');"> Download </a></li>
-                <li><a href="#" onclick="return postEvent(this, 'Documentation', 'MainMenu');"> Documentation </a></li>
+                <li><a href="/index.html#why"> Why? </a></li>
+                <li><a href="/index.html#download"> Download </a></li>
+                <li><a href="#"> Documentation </a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
     </div>
 </nav>
 
-<div class="container-fluid">
-    <div class="jumbotron">
-        <h2 align="center"></h2>
-        <p align="center">
-            Sorry there is no documentation yet.
-            <br/>
-            But feel free to drop a line to dev@codehistoryminer.com or @CodeHistoryMine on twitter.
+<div class="container">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 text-justify lead">
+
+        <h2 class="text-center">Overview</h2>
+        <p>
+            In general, the idea is to use code history miner web server as
+            <a href="http://c2.com/cgi/wiki?InformationRadiator">information radiator</a>
+            for the changes tracked in VCS of a project.
+            For example, you can use
+            <a href="examples/JUnit.html#code-churn-chart">Code Churn</a>,
+            <a href="examples/JUnit.html#amount-of-changing-files-chart">Amount of Changing File Charts</a>
+            to be aware of large changes on the project.
         </p>
-    </div>
-</div>
+        <p>
+            Because visualizations are interactive, you can also look into a bit more details, filter, group or play with data.
+            To see available visualizations see
+            <a href="examples/JUnit.html">JUnit</a>,
+            <a href="examples/Cucumber.html">Cucumber</a>,
+            <a href="examples/Rails.html">Ruby on Rails</a>,
+            <a href="examples/jQuery.html">jQuery</a>,
+            <a href="examples/Clojure.html">Clojure</a>,
+            <a href="examples/Groovy.html">Groovy</a>,
+            <a href="examples/Scala.html">Scala</a>,
+            <a href="examples/IntelliJ.html">IntelliJ</a>
+            (for description of visualizations click
+            on&nbsp;<i class="fa fa-question-circle"></i>&nbsp;icon
+            in the left bottom corner of each visualization).
+        </p>
+        <p>
+            Note that VCS data might contain some noise, e.g. files updated by CI server.
+            This is the major missing feature at moment and will be fixed in future releases.
+            For in-depth ideas about analyzing code history see
+            <a href="https://pragprog.com/book/atcrime/your-code-as-a-crime-scene">
+                Your Code as a Crime Scene book.
+            </a>
+        </p>
+
+
+        <h2 class="text-center">Configuring Projects</h2>
+        <p>
+            In code history miner project is a named set of VCS urls with some additional settings.
+        </p>
+        To create new project:
+        <ul>
+            <li>on home page "Add Project" button below projects table</li>
+            <li>on any page Main Menu -> Projects -> Add Project</li>
+        </ul>
+        To edit existing project:
+        <ul>
+            <li>on home page click on dropdown next to project name and choose "Edit Settings" menu item</li>
+        </ul>
+        To delete project:
+        <ul>
+            <li>on home page click on dropdown next to project name and choose "Edit Settings" menu item</li>
+            <li>use "Delete" button in the bottom right of the screen</li>
+        </ul>
+        <p>
+            For description of particular fields in Project Settings page
+            see&nbsp;<i class="fa fa-question-circle"></i>&nbsp;popup tooltips.
+            <br/><br/>
+            When running code history on new project, it might be useful to start with
+            relatively small date range so that amount of changes is not too big.
+            This should create faster feedback loop to experiment with settings.
+        </p>
+
+
+        <h2 class="text-center">Generating Visualizations</h2>
+        To generate visualizations for your project:
+        <ul>
+            <li>on home page in "Project" column click on dropdown next to project name</li>
+            <li>choose "Update from VCS" menu item</li>
+        </ul>
+        To view visualizations:
+        <ul>
+            <li>on home page in "Project" column click on project name</li>
+            <li>on any page Main Menu -> Projects -> [Project Name]</li>
+        </ul>
+        Note that visualization urls don't change between requests or server restarts and can be bookmarked/shared.
+
+
+        <h2 class="text-center">General Settings</h2>
+        <p>These are settings which are common for all projects.
+            In particular, settings with paths to VCS systems.
+            If you have VCS binaries on system path, code history miner will use it.</p>
+        <p>For description of particular fields in General Settings page 
+        see&nbsp;<i class="fa fa-question-circle"></i>&nbsp;popup tooltips.</p>
+
+
+        <h2 class="text-center">Troubleshooting</h2>
+        <p>
+        If something doesn't work as expected, it might be useful
+        to enable verbose logging in Main Menu -> Settings -> Verbose logging.
+        You can find logs in [installation folder]/log.
+        </p>
+        <p>
+        All code history miner settings and project are checked out into [installation folder]/.workspace folder.
+        This might be useful for backups or to edit settings manually.
+        </p>
+
+
+        <h2 class="text-center">Using CLI</h2>
+        <p>
+        Besides web server, code history miner comes with command line interface.
+        Use code-miner-cli.sh (or .bat) to run it.
+        </p>
+        It has two main commands:
+        <ul>
+            <li>"grab" to extract data from VCS into csv file and</li>
+            <li>"visualize" to read .csv and produce standalone .html files with visualizations</li>
+        </ul>
+        For example, to visualize junit history from 2012 to 2014:
+        <pre>
+> git clone https://github.com/junit-team/junit
+> cd junit
+> code-mining.sh grab --from 01/01/2012 --to 01/01/2014
+> code-mining.sh visualize --csv junit.csv
+</pre>
+        For description of other commands/options please see help output of CLI.
+
+
+        <h2 class="text-center">More Help</h2>
+        For any other questions feel free to get in touch
+        by <a href="mailto:dev@codehistoryminer.com">email</a>,
+        <a href="https://twitter.com/CodeHistoryMine">twitter</a>
+        or <a href="https://github.com/code-mine/code-history-miner/issues/new">github</a>.
+
+        <br/><br/>
+    </div></div>
 
 <footer class="footer">
     <div class="container">
