@@ -1,4 +1,6 @@
 <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>Code History Miner</title>
     <link rel="shortcut icon" href="favicon.ico"/>
     <link href="stylesheets/bootstrap.css" rel="stylesheet"/>
     <link href="stylesheets/bootstrap-theme.css" rel="stylesheet"/>
@@ -16,9 +18,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="index.html#why"> Why? </a></li>
-                <li><a href="index.html#download"> Download </a></li>
-                <li><a href="#"> Documentation </a></li>
+                <li><a href="index.html#why" onclick="return postEvent(this, 'Why', 'MainMenu');"> Why? </a></li>
+                <li><a href="index.html#download" onclick="return postEvent(this, 'Download', 'MainMenu');"> Download </a></li>
+                <li><a href="index.html#buy" onclick="return postEvent(this, 'Buy', 'MainMenu');"> Preorder </a></li>
+                <li><a href="#" onclick="return postEvent(this, 'Documentation', 'MainMenu');"> Documentation </a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -140,15 +143,15 @@
         <pre>
 > git clone https://github.com/junit-team/junit
 > cd junit
-> code-mining.sh grab --from 01/01/2012 --to 01/01/2014
-> code-mining.sh visualize --csv junit.csv
+> code-miner-cli.sh grab --from 01/01/2012 --to 01/01/2014
+> code-miner-cli.sh visualize --csv junit.csv
 </pre>
         For description of other commands/options please see help output of CLI.
 
 
         <h2 class="text-center">More Help</h2>
         For any other questions feel free to get in touch
-        by <a href="mailto:dev@codehistoryminer.com">email</a>,
+        by <a href="mailto:hello@codehistoryminer.com">email</a>,
         <a href="https://twitter.com/CodeHistoryMine">twitter</a>
         or <a href="https://github.com/code-mine/code-history-miner/issues/new">github</a>.
 
@@ -164,7 +167,7 @@
                         <i class="fa fa-twitter-square fa-2x"></i>
                     </a>
                     &nbsp;
-                    <a href="mailto:dev@codehistoryminer.com">
+                    <a href="mailto:hello@codehistoryminer.com">
                         <i class="fa fa-envelope-square fa-2x"></i>
                     </a>
                 </span>

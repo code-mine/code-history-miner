@@ -1,4 +1,6 @@
 <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>Code History Miner</title>
     <link rel="shortcut icon" href="favicon.ico"/>
     <link href="stylesheets/bootstrap.css" rel="stylesheet"/>
     <link href="stylesheets/bootstrap-theme.css" rel="stylesheet"/>
@@ -20,6 +22,9 @@
     <script src="js/series-chart.js"></script>
     <script src="js/force-graph.js"></script>
 
+    <script src="js/json2.js"></script>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+
     <style>
         /* hide barchart tooltips because mis-aligned in carousel */
         .tooltip {
@@ -36,9 +41,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#why" onclick="return postEvent(this, 'Why', 'MainMenu');"> Why? </a></li>
-                <li><a href="#download" onclick="return postEvent(this, 'Download', 'MainMenu');"> Download </a></li>
-                <li><a href="help.html" onclick="return postEvent(this, 'Documentation', 'MainMenu');"> Documentation </a></li>
+                <li><a href="#why" onclick="return postGAEvent(this, 'Why', 'MainMenu');"> Why? </a></li>
+                <li><a href="#download" onclick="return postGAEvent(this, 'Download', 'MainMenu');"> Download </a></li>
+                <li><a href="#buy" onclick="return postGAEvent(this, 'Buy', 'MainMenu');"> Preorder </a></li>
+                <li><a href="help.html" onclick="return postGAEvent(this, 'Documentation', 'MainMenu');"> Documentation </a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -51,11 +57,11 @@
             Server for project code history analysis and visualization.
         </p>
         <div align="center">
-            <a id="download-url" class="btn btn-primary" href="#" role="button" onclick="return postEvent(this, 'Download', 'Page');">
+            <a id="download-url" class="btn btn-primary" href="#" role="button" onclick="return postGAEvent(this, 'Download', 'Page');">
                 Download
             </a>
             <!--version-->0.1 beta<!--version-->,
-            built on <!--build-date-->27 Jul 2015<!--build-date-->
+            built on <!--build-date-->23 Nov 2015<!--build-date-->
         </div>
     </div>
 </div>
@@ -69,7 +75,7 @@
                     
     <section class="row">
         
-        <div id="change-size-chart" class="bar-chart"></div>
+        <div id="code-churn-chart" class="bar-chart"></div>
         
         <br/><br/>
     </section>
@@ -139,14 +145,14 @@
         </p>
         <p align="center">
             For visualization examples see
-            <a href="examples/JUnit.html" onclick="return postEvent(this, 'JUnit', 'Page');">JUnit</a>,
-            <a href="examples/Cucumber.html" onclick="return postEvent(this, 'Cucumber', 'Page');">Cucumber</a>,
-            <a href="examples/Rails.html" onclick="return postEvent(this, 'RoR', 'Page');">Ruby on Rails</a>,
-            <a href="examples/jQuery.html" onclick="return postEvent(this, 'jQuery', 'Page');">jQuery</a>,
-            <a href="examples/Clojure.html" onclick="return postEvent(this, 'Clojure', 'Page');">Clojure</a>,
-            <a href="examples/Groovy.html" onclick="return postEvent(this, 'Groovy', 'Page');">Groovy</a>,
-            <a href="examples/Scala.html" onclick="return postEvent(this, 'Scala', 'Page');">Scala</a>,
-            <a href="examples/IntelliJ.html" onclick="return postEvent(this, 'IntelliJ', 'Page');">IntelliJ</a>.
+            <a href="examples/JUnit.html" onclick="return postGAEvent(this, 'JUnit', 'Page');">JUnit</a>,
+            <a href="examples/Cucumber.html" onclick="return postGAEvent(this, 'Cucumber', 'Page');">Cucumber</a>,
+            <a href="examples/Rails.html" onclick="return postGAEvent(this, 'RoR', 'Page');">Ruby on Rails</a>,
+            <a href="examples/jQuery.html" onclick="return postGAEvent(this, 'jQuery', 'Page');">jQuery</a>,
+            <a href="examples/Clojure.html" onclick="return postGAEvent(this, 'Clojure', 'Page');">Clojure</a>,
+            <a href="examples/Groovy.html" onclick="return postGAEvent(this, 'Groovy', 'Page');">Groovy</a>,
+            <a href="examples/Scala.html" onclick="return postGAEvent(this, 'Scala', 'Page');">Scala</a>,
+            <a href="examples/IntelliJ.html" onclick="return postGAEvent(this, 'IntelliJ', 'Page');">IntelliJ</a>.
         </p>
     </div>
 
@@ -157,11 +163,11 @@
         </p>
     </div>
 
-    <div class="jumbotron" id="download">
+    <div class="jumbotron" id="download" style="margin-bottom: 0">
         <h2 align="center">Download / Install</h2>
             <div align="center">
                 <a id="download-url2" class="btn btn-primary" href="#" role="button" style="margin-right: 0"
-                   onclick="return postEvent(this, 'Download', 'Page');">
+                   onclick="return postGAEvent(this, 'Download', 'Page');">
                     Download Latest Version
                 </a>
                 <br/>
@@ -181,15 +187,32 @@ Started server on http://127.0.0.1:8222
 </pre>
                 </div>
             </p>
+        <p align="center" class="text-muted">
+            <small>
+                System requirements: Git / Hg / Svn; browser with SVG support; project size < 1M LOC; any OS with Java >= 1.6.
+            </small>
+        </p>
     </div>
-    <div class="jumbotron" style="background-color: #fff">
-        <h2 align="center">Requirements</h2>
+    <div class="jumbotron" id="buy" style="background-color: #fff">
+        <h2 align="center">Preorder</h2>
+        <p align="center">Code History Miner is currently in beta. It is planned to be released in the beginning of 2016.</p>
         <div align="center">
-            <p>Git / Svn</p>
-            <p>Browser with SVG support</p>
-            <p>Project size < 1M LOC</p>
-            <p>Any OS with Java >= 1.6</p>
+            <a id="buyButton" class="btn btn-success" href="#" role="button" style="margin-right: 0">
+                Preorder Code History Miner 1.0
+            </a>
         </div>
+        <br/>
+    </div>
+    <div class="jumbotron" style="margin-bottom: 0">
+        <h2 align="center">Upcoming Features</h2>
+        <div align="center">
+            <p>VCS data cleansing</p>
+            <p>More visualizations</p>
+            <p>Better performance for large projects</p>
+            <p>Custom VCS data queries</p>
+        </div>
+        <br/>
+        <br/>
     </div>
 </div>
 
@@ -202,7 +225,7 @@ Started server on http://127.0.0.1:8222
                         <i class="fa fa-twitter-square fa-2x"></i>
                     </a>
                     &nbsp;
-                    <a href="mailto:dev@codehistoryminer.com">
+                    <a href="mailto:hello@codehistoryminer.com">
                         <i class="fa fa-envelope-square fa-2x"></i>
                     </a>
                 </span>
@@ -3150,6 +3173,69 @@ date,value\n\
 27/06/2015,1\n\
 28/06/2015,3\n\
 29/06/2015,1\n\
+30/06/2015,2\n\
+02/07/2015,1\n\
+04/07/2015,1\n\
+06/07/2015,1\n\
+09/07/2015,1\n\
+13/07/2015,2\n\
+14/07/2015,1\n\
+15/07/2015,4\n\
+16/07/2015,5\n\
+17/07/2015,3\n\
+18/07/2015,2\n\
+20/07/2015,1\n\
+23/07/2015,19\n\
+24/07/2015,3\n\
+27/07/2015,4\n\
+28/07/2015,3\n\
+29/07/2015,2\n\
+30/07/2015,1\n\
+31/07/2015,1\n\
+04/08/2015,2\n\
+05/08/2015,2\n\
+06/08/2015,1\n\
+07/08/2015,1\n\
+08/08/2015,1\n\
+18/08/2015,1\n\
+19/08/2015,4\n\
+21/08/2015,1\n\
+23/08/2015,3\n\
+24/08/2015,1\n\
+27/08/2015,2\n\
+29/08/2015,1\n\
+31/08/2015,1\n\
+01/09/2015,2\n\
+02/09/2015,12\n\
+03/09/2015,3\n\
+04/09/2015,1\n\
+08/09/2015,2\n\
+09/09/2015,4\n\
+10/09/2015,3\n\
+11/09/2015,1\n\
+12/09/2015,1\n\
+14/09/2015,4\n\
+15/09/2015,1\n\
+16/09/2015,1\n\
+17/09/2015,1\n\
+18/09/2015,4\n\
+19/09/2015,2\n\
+20/09/2015,1\n\
+21/09/2015,8\n\
+22/09/2015,1\n\
+24/09/2015,3\n\
+30/09/2015,4\n\
+02/10/2015,2\n\
+06/10/2015,3\n\
+07/10/2015,2\n\
+08/10/2015,6\n\
+09/10/2015,2\n\
+10/10/2015,2\n\
+12/10/2015,1\n\
+13/10/2015,1\n\
+15/10/2015,1\n\
+21/10/2015,1\n\
+25/10/2015,1\n\
 ",
 "\
 date,added,modified,removed\n\
@@ -6084,6 +6170,69 @@ date,added,modified,removed\n\
 27/06/2015,2,2,0\n\
 28/06/2015,1,23,0\n\
 29/06/2015,0,2,0\n\
+30/06/2015,4,22,0\n\
+02/07/2015,0,1,0\n\
+04/07/2015,0,3,0\n\
+06/07/2015,0,18,0\n\
+09/07/2015,0,1,0\n\
+13/07/2015,0,2,0\n\
+14/07/2015,0,1,0\n\
+15/07/2015,0,26,0\n\
+16/07/2015,2,7,0\n\
+17/07/2015,0,11,0\n\
+18/07/2015,0,2,0\n\
+20/07/2015,1,5,0\n\
+23/07/2015,10,33,0\n\
+24/07/2015,8,25,2\n\
+27/07/2015,3,4,0\n\
+28/07/2015,0,17,0\n\
+29/07/2015,1,11,0\n\
+30/07/2015,0,3,0\n\
+31/07/2015,1,1,0\n\
+04/08/2015,0,5,0\n\
+05/08/2015,0,2,0\n\
+06/08/2015,0,2,0\n\
+07/08/2015,0,1,0\n\
+08/08/2015,0,1,0\n\
+18/08/2015,0,3,2\n\
+19/08/2015,0,4,0\n\
+21/08/2015,0,1,0\n\
+23/08/2015,2,42,0\n\
+24/08/2015,0,1,0\n\
+27/08/2015,1,8,0\n\
+29/08/2015,0,1,0\n\
+31/08/2015,0,1,0\n\
+01/09/2015,0,3,0\n\
+02/09/2015,3,147,0\n\
+03/09/2015,0,8,0\n\
+04/09/2015,0,8,0\n\
+08/09/2015,0,5,0\n\
+09/09/2015,0,14,0\n\
+10/09/2015,0,6,0\n\
+11/09/2015,0,1,0\n\
+12/09/2015,2,1,0\n\
+14/09/2015,0,4,0\n\
+15/09/2015,0,1,0\n\
+16/09/2015,0,1,0\n\
+17/09/2015,1,1,0\n\
+18/09/2015,0,4,1\n\
+19/09/2015,0,3,0\n\
+20/09/2015,0,6,0\n\
+21/09/2015,11,12,0\n\
+22/09/2015,3,5,1\n\
+24/09/2015,0,9,0\n\
+30/09/2015,0,4,0\n\
+02/10/2015,0,2,0\n\
+06/10/2015,7,2,0\n\
+07/10/2015,2,1,0\n\
+08/10/2015,2,8,1\n\
+09/10/2015,0,10,0\n\
+10/10/2015,1,2,0\n\
+12/10/2015,0,6,2\n\
+13/10/2015,0,2,0\n\
+15/10/2015,0,1,0\n\
+21/10/2015,0,27,0\n\
+25/10/2015,0,1,1\n\
 ",
 "\
 date,added,modified,removed\n\
@@ -9018,6 +9167,69 @@ date,added,modified,removed\n\
 27/06/2015,6,18,2\n\
 28/06/2015,5,31,0\n\
 29/06/2015,5,4,0\n\
+30/06/2015,0,28,0\n\
+02/07/2015,0,1,0\n\
+04/07/2015,1,2,0\n\
+06/07/2015,0,24,0\n\
+09/07/2015,0,1,0\n\
+13/07/2015,1,0,1\n\
+14/07/2015,65,0,0\n\
+15/07/2015,3,28,3\n\
+16/07/2015,7,70,16\n\
+17/07/2015,0,16,0\n\
+18/07/2015,0,1,1\n\
+20/07/2015,5,2,0\n\
+23/07/2015,265,204,118\n\
+24/07/2015,30,58,7\n\
+27/07/2015,1,23,3\n\
+28/07/2015,5,17,3\n\
+29/07/2015,2,21,0\n\
+30/07/2015,19,29,0\n\
+31/07/2015,0,1,0\n\
+04/08/2015,1,41,0\n\
+05/08/2015,0,3,0\n\
+06/08/2015,0,2,1\n\
+07/08/2015,0,1,0\n\
+08/08/2015,4,0,0\n\
+18/08/2015,0,1,63\n\
+19/08/2015,21,17,18\n\
+21/08/2015,1,1,0\n\
+23/08/2015,23,51,0\n\
+24/08/2015,0,2,0\n\
+27/08/2015,35,5,1\n\
+29/08/2015,0,2,0\n\
+31/08/2015,0,1,0\n\
+01/09/2015,0,3,0\n\
+02/09/2015,143,129,37\n\
+03/09/2015,24,7,3\n\
+04/09/2015,7,3,1\n\
+08/09/2015,15,10,1\n\
+09/09/2015,28,23,2\n\
+10/09/2015,43,6,1\n\
+11/09/2015,1,0,0\n\
+12/09/2015,0,1,0\n\
+14/09/2015,1,6,0\n\
+15/09/2015,0,1,0\n\
+16/09/2015,5,0,0\n\
+17/09/2015,3,0,0\n\
+18/09/2015,0,8,105\n\
+19/09/2015,0,3,0\n\
+20/09/2015,42,24,4\n\
+21/09/2015,32,26,14\n\
+22/09/2015,13,2,7\n\
+24/09/2015,25,3,1\n\
+30/09/2015,4,4,0\n\
+02/10/2015,0,4,0\n\
+06/10/2015,3,1,0\n\
+07/10/2015,2,10,0\n\
+08/10/2015,15,18,17\n\
+09/10/2015,23,58,0\n\
+10/10/2015,13,1,0\n\
+12/10/2015,9,2,39\n\
+13/10/2015,0,0,4\n\
+15/10/2015,2,0,2\n\
+21/10/2015,0,22,1\n\
+25/10/2015,0,6,7\n\
 ",
 "\
 date,added,modified,removed\n\
@@ -11952,11 +12164,74 @@ date,added,modified,removed\n\
 27/06/2015,431,953,77\n\
 28/06/2015,329,2203,0\n\
 29/06/2015,331,204,0\n\
+30/06/2015,0,2245,0\n\
+02/07/2015,0,57,0\n\
+04/07/2015,82,217,0\n\
+06/07/2015,0,1841,0\n\
+09/07/2015,0,115,0\n\
+13/07/2015,181,0,98\n\
+14/07/2015,4563,0,0\n\
+15/07/2015,78,2111,207\n\
+16/07/2015,655,6023,870\n\
+17/07/2015,0,1194,0\n\
+18/07/2015,0,85,168\n\
+20/07/2015,441,153,0\n\
+23/07/2015,13771,13759,6548\n\
+24/07/2015,2019,3992,135\n\
+27/07/2015,123,2222,198\n\
+28/07/2015,368,1284,278\n\
+29/07/2015,174,1346,0\n\
+30/07/2015,1456,889,0\n\
+31/07/2015,0,36,0\n\
+04/08/2015,50,1299,0\n\
+05/08/2015,0,129,0\n\
+06/08/2015,0,129,90\n\
+07/08/2015,0,65,0\n\
+08/08/2015,280,0,0\n\
+18/08/2015,0,110,2686\n\
+19/08/2015,1682,1609,1033\n\
+21/08/2015,340,71,0\n\
+23/08/2015,944,3794,0\n\
+24/08/2015,0,121,0\n\
+27/08/2015,1920,400,59\n\
+29/08/2015,0,115,0\n\
+31/08/2015,0,68,0\n\
+01/09/2015,0,308,0\n\
+02/09/2015,7818,6474,1650\n\
+03/09/2015,1273,383,206\n\
+04/09/2015,777,319,123\n\
+08/09/2015,1086,732,14\n\
+09/09/2015,1414,1660,78\n\
+10/09/2015,1286,432,1\n\
+11/09/2015,29,0,0\n\
+12/09/2015,0,79,0\n\
+14/09/2015,108,288,0\n\
+15/09/2015,0,93,0\n\
+16/09/2015,136,0,0\n\
+17/09/2015,149,0,0\n\
+18/09/2015,0,753,3535\n\
+19/09/2015,0,212,0\n\
+20/09/2015,1718,1030,79\n\
+21/09/2015,1587,1687,691\n\
+22/09/2015,1005,128,426\n\
+24/09/2015,1132,227,29\n\
+30/09/2015,128,330,0\n\
+02/10/2015,0,457,0\n\
+06/10/2015,130,150,0\n\
+07/10/2015,137,763,0\n\
+08/10/2015,879,1561,981\n\
+09/10/2015,1163,2736,0\n\
+10/10/2015,562,60,0\n\
+12/10/2015,902,139,1207\n\
+13/10/2015,0,0,141\n\
+15/10/2015,51,0,51\n\
+21/10/2015,0,1386,44\n\
+25/10/2015,0,189,110\n\
 "];
 
         _.extend(this, d3c.barCharts());
 
-        var root = removeChildrenOf(d3.select("#change-size-chart"));
+        var root = removeChildrenOf(d3.select("#code-churn-chart"));
 
         var margin = {top: 40, right: 50, bottom: 20, left: 50};
         var uiConfig = {
@@ -12735,6 +13010,14 @@ date,value\n\
 05/06/2015,1\n\
 10/06/2015,1\n\
 26/06/2015,1\n\
+01/07/2015,1\n\
+02/07/2015,1\n\
+08/07/2015,1\n\
+25/07/2015,1\n\
+07/08/2015,1\n\
+08/08/2015,1\n\
+28/09/2015,1\n\
+02/10/2015,1\n\
 11/01/2001,64\n\
 12/01/2001,64\n\
 13/01/2001,64\n\
@@ -17299,6 +17582,96 @@ date,value\n\
 23/06/2015,1\n\
 24/06/2015,1\n\
 25/06/2015,1\n\
+27/06/2015,1\n\
+28/06/2015,1\n\
+29/06/2015,1\n\
+30/06/2015,1\n\
+03/07/2015,1\n\
+04/07/2015,1\n\
+05/07/2015,1\n\
+06/07/2015,1\n\
+07/07/2015,1\n\
+09/07/2015,1\n\
+10/07/2015,1\n\
+11/07/2015,1\n\
+12/07/2015,1\n\
+13/07/2015,1\n\
+14/07/2015,1\n\
+15/07/2015,1\n\
+16/07/2015,1\n\
+17/07/2015,1\n\
+18/07/2015,1\n\
+19/07/2015,1\n\
+20/07/2015,1\n\
+21/07/2015,1\n\
+22/07/2015,1\n\
+23/07/2015,1\n\
+24/07/2015,1\n\
+26/07/2015,1\n\
+27/07/2015,1\n\
+28/07/2015,1\n\
+29/07/2015,1\n\
+30/07/2015,1\n\
+31/07/2015,1\n\
+01/08/2015,1\n\
+02/08/2015,1\n\
+03/08/2015,1\n\
+04/08/2015,1\n\
+05/08/2015,1\n\
+06/08/2015,1\n\
+09/08/2015,1\n\
+10/08/2015,1\n\
+11/08/2015,1\n\
+12/08/2015,1\n\
+13/08/2015,1\n\
+14/08/2015,1\n\
+15/08/2015,1\n\
+16/08/2015,1\n\
+17/08/2015,1\n\
+18/08/2015,1\n\
+19/08/2015,1\n\
+20/08/2015,1\n\
+21/08/2015,1\n\
+22/08/2015,1\n\
+23/08/2015,1\n\
+24/08/2015,1\n\
+25/08/2015,1\n\
+26/08/2015,1\n\
+27/08/2015,1\n\
+28/08/2015,1\n\
+29/08/2015,1\n\
+30/08/2015,1\n\
+31/08/2015,1\n\
+01/09/2015,1\n\
+02/09/2015,1\n\
+03/09/2015,1\n\
+04/09/2015,1\n\
+05/09/2015,1\n\
+06/09/2015,1\n\
+07/09/2015,1\n\
+08/09/2015,1\n\
+09/09/2015,1\n\
+10/09/2015,1\n\
+11/09/2015,1\n\
+12/09/2015,1\n\
+13/09/2015,1\n\
+14/09/2015,1\n\
+15/09/2015,1\n\
+16/09/2015,1\n\
+17/09/2015,1\n\
+18/09/2015,1\n\
+19/09/2015,1\n\
+20/09/2015,1\n\
+21/09/2015,1\n\
+22/09/2015,1\n\
+23/09/2015,1\n\
+24/09/2015,1\n\
+25/09/2015,1\n\
+26/09/2015,1\n\
+27/09/2015,1\n\
+29/09/2015,1\n\
+30/09/2015,1\n\
+01/10/2015,1\n\
 ",
 "\
 date,value\n\
@@ -17665,6 +18038,11 @@ date,value\n\
 01/06/2015,1\n\
 08/06/2015,1\n\
 22/06/2015,1\n\
+29/06/2015,1\n\
+06/07/2015,1\n\
+20/07/2015,1\n\
+03/08/2015,1\n\
+28/09/2015,1\n\
 22/01/2001,64\n\
 29/01/2001,64\n\
 05/02/2001,64\n\
@@ -18057,6 +18435,15 @@ date,value\n\
 04/05/2015,1\n\
 25/05/2015,1\n\
 15/06/2015,1\n\
+13/07/2015,1\n\
+27/07/2015,1\n\
+10/08/2015,1\n\
+17/08/2015,1\n\
+24/08/2015,1\n\
+31/08/2015,1\n\
+07/09/2015,1\n\
+14/09/2015,1\n\
+21/09/2015,1\n\
 ",
 "\
 date,value\n\
@@ -18196,6 +18583,10 @@ date,value\n\
 01/04/2015,0\n\
 01/05/2015,0\n\
 01/06/2015,0\n\
+01/07/2015,0\n\
+01/08/2015,0\n\
+01/09/2015,0\n\
+01/10/2015,0\n\
 01/02/2001,63\n\
 01/03/2001,63\n\
 01/06/2001,63\n\
@@ -18777,6 +19168,23 @@ date,unchanged,recently changed\n\
 15/06/2015,294,9\n\
 22/06/2015,303,0\n\
 29/06/2015,302,1\n\
+06/07/2015,303,0\n\
+13/07/2015,268,37\n\
+20/07/2015,295,11\n\
+27/07/2015,285,21\n\
+03/08/2015,300,6\n\
+10/08/2015,306,0\n\
+17/08/2015,306,0\n\
+24/08/2015,306,0\n\
+31/08/2015,297,10\n\
+07/09/2015,298,11\n\
+14/09/2015,309,0\n\
+21/09/2015,309,0\n\
+28/09/2015,309,0\n\
+05/10/2015,309,0\n\
+12/10/2015,285,24\n\
+19/10/2015,309,0\n\
+26/10/2015,293,17\n\
 ",
 "\
 date,unchanged,recently changed\n\
@@ -18892,6 +19300,10 @@ date,unchanged,recently changed\n\
 01/04/2015,285,18\n\
 01/05/2015,287,16\n\
 01/06/2015,294,9\n\
+01/07/2015,257,49\n\
+01/08/2015,300,6\n\
+01/09/2015,289,20\n\
+01/10/2015,277,33\n\
 "];
 
         _.extend(this, d3c.barCharts());
@@ -18946,8 +19358,81 @@ date,unchanged,recently changed\n\
 
 
 
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="paymentStub">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">No pre-ordering yet&nbsp;&nbsp;:&nbsp;(</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        If you would like to be notified when final release is available,
+                        please follow <a href="https://twitter.com/CodeHistoryMine">@CodeHistoryMine</a> on twitter
+                        or drop a line to <a href="mailto:hello@codehistoryminer.com">hello@codehistoryminer.com</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="paymentFailed" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Payment Failed</h4>
+            </div>
+            <div class="modal-body">
+                <p>Sorry, something went wrong with the payment. Please try again.</p>
+                <p>If the error persists, email to
+                    <a href="mailto:hello@codehistoryminer.com">hello@codehistoryminer.com</a>.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var handler = StripeCheckout.configure({
+        key: 'pk_live_hEfaQfFrLVQFi5z4DnT2qg2F',
+//        image: '/img/documentation/checkout/marketplace.png',
+        token: function(token) {
+            var data = {
+                id: token.id,
+                email: token.email
+            };
+            $.ajax("charge", {dataType: "json", data: JSON.stringify(data), type: "post"})
+                    .fail(function(xhr, error) {
+                        $('#paymentFailed').modal();
+                    });
+        }
+    });
+    $('#buyButton').on('click', function(e) {
+        $('#paymentStub').modal('show');
+//        handler.open({
+//            name: 'Code History Miner 1.0',
+//            description: 'Perpetual License',
+//            panelLabel: 'Buy Now for',
+//            amount: 3000,
+//            allowRememberMe: false
+//        });
+        postGAEventWithNoRedirect('Buy', 'Page');
+        e.preventDefault();
+    });
+
+    // Close Checkout on page navigation
+    $(window).on('popstate', function() {
+        handler.close();
+    });
+</script>
+
 <script type="text/javascript">
-    var downloadUrl = /*download-url*/ "download/code-history-miner-389.zip" /*download-url*/;
+    var downloadUrl = /*download-url*/ "download/code-history-miner-544.zip" /*download-url*/;
     $("#download-url").attr("href", downloadUrl);
     $("#download-url2").attr("href", downloadUrl);
 
@@ -18961,7 +19446,11 @@ date,unchanged,recently changed\n\
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
 
-    function postEvent(aTag, action, category) {
+    function postGAEventWithNoRedirect(action, category) {
+        _gaq.push(['_trackEvent', category, action]);
+    }
+
+    function postGAEvent(aTag, action, category) {
         _gaq.push(['_trackEvent', category, action, aTag.href]);
         setTimeout(function() {
             location.href = aTag.href;

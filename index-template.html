@@ -1,4 +1,6 @@
 <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>Code History Miner</title>
     <link rel="shortcut icon" href="favicon.ico"/>
     <link href="stylesheets/bootstrap.css" rel="stylesheet"/>
     <link href="stylesheets/bootstrap-theme.css" rel="stylesheet"/>
@@ -20,6 +22,9 @@
     <script src="js/series-chart.js"></script>
     <script src="js/force-graph.js"></script>
 
+    <script src="js/json2.js"></script>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+
     <style>
         /* hide barchart tooltips because mis-aligned in carousel */
         .tooltip {
@@ -36,9 +41,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#why" onclick="return postEvent(this, 'Why', 'MainMenu');"> Why? </a></li>
-                <li><a href="#download" onclick="return postEvent(this, 'Download', 'MainMenu');"> Download </a></li>
-                <li><a href="help.html" onclick="return postEvent(this, 'Documentation', 'MainMenu');"> Documentation </a></li>
+                <li><a href="#why" onclick="return postGAEvent(this, 'Why', 'MainMenu');"> Why? </a></li>
+                <li><a href="#download" onclick="return postGAEvent(this, 'Download', 'MainMenu');"> Download </a></li>
+                <li><a href="#buy" onclick="return postGAEvent(this, 'Buy', 'MainMenu');"> Preorder </a></li>
+                <li><a href="help.html" onclick="return postGAEvent(this, 'Documentation', 'MainMenu');"> Documentation </a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -51,7 +57,7 @@
             Server for project code history analysis and visualization.
         </p>
         <div align="center">
-            <a id="download-url" class="btn btn-primary" href="#" role="button" onclick="return postEvent(this, 'Download', 'Page');">
+            <a id="download-url" class="btn btn-primary" href="#" role="button" onclick="return postGAEvent(this, 'Download', 'Page');">
                 Download
             </a>
             <!--version-->0.1 beta<!--version-->,
@@ -118,14 +124,14 @@
         </p>
         <p align="center">
             For visualization examples see
-            <a href="examples/JUnit.html" onclick="return postEvent(this, 'JUnit', 'Page');">JUnit</a>,
-            <a href="examples/Cucumber.html" onclick="return postEvent(this, 'Cucumber', 'Page');">Cucumber</a>,
-            <a href="examples/Rails.html" onclick="return postEvent(this, 'RoR', 'Page');">Ruby on Rails</a>,
-            <a href="examples/jQuery.html" onclick="return postEvent(this, 'jQuery', 'Page');">jQuery</a>,
-            <a href="examples/Clojure.html" onclick="return postEvent(this, 'Clojure', 'Page');">Clojure</a>,
-            <a href="examples/Groovy.html" onclick="return postEvent(this, 'Groovy', 'Page');">Groovy</a>,
-            <a href="examples/Scala.html" onclick="return postEvent(this, 'Scala', 'Page');">Scala</a>,
-            <a href="examples/IntelliJ.html" onclick="return postEvent(this, 'IntelliJ', 'Page');">IntelliJ</a>.
+            <a href="examples/JUnit.html" onclick="return postGAEvent(this, 'JUnit', 'Page');">JUnit</a>,
+            <a href="examples/Cucumber.html" onclick="return postGAEvent(this, 'Cucumber', 'Page');">Cucumber</a>,
+            <a href="examples/Rails.html" onclick="return postGAEvent(this, 'RoR', 'Page');">Ruby on Rails</a>,
+            <a href="examples/jQuery.html" onclick="return postGAEvent(this, 'jQuery', 'Page');">jQuery</a>,
+            <a href="examples/Clojure.html" onclick="return postGAEvent(this, 'Clojure', 'Page');">Clojure</a>,
+            <a href="examples/Groovy.html" onclick="return postGAEvent(this, 'Groovy', 'Page');">Groovy</a>,
+            <a href="examples/Scala.html" onclick="return postGAEvent(this, 'Scala', 'Page');">Scala</a>,
+            <a href="examples/IntelliJ.html" onclick="return postGAEvent(this, 'IntelliJ', 'Page');">IntelliJ</a>.
         </p>
     </div>
 
@@ -136,11 +142,11 @@
         </p>
     </div>
 
-    <div class="jumbotron" id="download">
+    <div class="jumbotron" id="download" style="margin-bottom: 0">
         <h2 align="center">Download / Install</h2>
             <div align="center">
                 <a id="download-url2" class="btn btn-primary" href="#" role="button" style="margin-right: 0"
-                   onclick="return postEvent(this, 'Download', 'Page');">
+                   onclick="return postGAEvent(this, 'Download', 'Page');">
                     Download Latest Version
                 </a>
                 <br/>
@@ -160,15 +166,32 @@ Started server on http://127.0.0.1:8222
 </pre>
                 </div>
             </p>
+        <p align="center" class="text-muted">
+            <small>
+                System requirements: Git / Hg / Svn; browser with SVG support; project size < 1M LOC; any OS with Java >= 1.6.
+            </small>
+        </p>
     </div>
-    <div class="jumbotron" style="background-color: #fff">
-        <h2 align="center">Requirements</h2>
+    <div class="jumbotron" id="buy" style="background-color: #fff">
+        <h2 align="center">Preorder</h2>
+        <p align="center">Code History Miner is currently in beta. It is planned to be released in the beginning of 2016.</p>
         <div align="center">
-            <p>Git / Svn</p>
-            <p>Browser with SVG support</p>
-            <p>Project size < 1M LOC</p>
-            <p>Any OS with Java >= 1.6</p>
+            <a id="buyButton" class="btn btn-success" href="#" role="button" style="margin-right: 0">
+                Preorder Code History Miner 1.0
+            </a>
         </div>
+        <br/>
+    </div>
+    <div class="jumbotron" style="margin-bottom: 0">
+        <h2 align="center">Upcoming Features</h2>
+        <div align="center">
+            <p>VCS data cleansing</p>
+            <p>More visualizations</p>
+            <p>Better performance for large projects</p>
+            <p>Custom VCS data queries</p>
+        </div>
+        <br/>
+        <br/>
     </div>
 </div>
 
@@ -181,7 +204,7 @@ Started server on http://127.0.0.1:8222
                         <i class="fa fa-twitter-square fa-2x"></i>
                     </a>
                     &nbsp;
-                    <a href="mailto:dev@codehistoryminer.com">
+                    <a href="mailto:hello@codehistoryminer.com">
                         <i class="fa fa-envelope-square fa-2x"></i>
                     </a>
                 </span>
@@ -195,6 +218,79 @@ Started server on http://127.0.0.1:8222
 <!--script-insert-point--><!--script-insert-point-->
 <!--script-insert-point--><!--script-insert-point-->
 <!--script-insert-point--><!--script-insert-point-->
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="paymentStub">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">No pre-ordering yet&nbsp;&nbsp;:&nbsp;(</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        If you would like to be notified when final release is available,
+                        please follow <a href="https://twitter.com/CodeHistoryMine">@CodeHistoryMine</a> on twitter
+                        or drop a line to <a href="mailto:hello@codehistoryminer.com">hello@codehistoryminer.com</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="paymentFailed" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Payment Failed</h4>
+            </div>
+            <div class="modal-body">
+                <p>Sorry, something went wrong with the payment. Please try again.</p>
+                <p>If the error persists, email to
+                    <a href="mailto:hello@codehistoryminer.com">hello@codehistoryminer.com</a>.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var handler = StripeCheckout.configure({
+        key: 'pk_live_hEfaQfFrLVQFi5z4DnT2qg2F',
+//        image: '/img/documentation/checkout/marketplace.png',
+        token: function(token) {
+            var data = {
+                id: token.id,
+                email: token.email
+            };
+            $.ajax("charge", {dataType: "json", data: JSON.stringify(data), type: "post"})
+                    .fail(function(xhr, error) {
+                        $('#paymentFailed').modal();
+                    });
+        }
+    });
+    $('#buyButton').on('click', function(e) {
+        $('#paymentStub').modal('show');
+//        handler.open({
+//            name: 'Code History Miner 1.0',
+//            description: 'Perpetual License',
+//            panelLabel: 'Buy Now for',
+//            amount: 3000,
+//            allowRememberMe: false
+//        });
+        postGAEventWithNoRedirect('Buy', 'Page');
+        e.preventDefault();
+    });
+
+    // Close Checkout on page navigation
+    $(window).on('popstate', function() {
+        handler.close();
+    });
+</script>
 
 <script type="text/javascript">
     var downloadUrl = /*download-url*/""/*download-url*/;
@@ -211,7 +307,11 @@ Started server on http://127.0.0.1:8222
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
 
-    function postEvent(aTag, action, category) {
+    function postGAEventWithNoRedirect(action, category) {
+        _gaq.push(['_trackEvent', category, action]);
+    }
+
+    function postGAEvent(aTag, action, category) {
         _gaq.push(['_trackEvent', category, action, aTag.href]);
         setTimeout(function() {
             location.href = aTag.href;
